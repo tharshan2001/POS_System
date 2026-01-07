@@ -1,7 +1,7 @@
 package com.pos.system.controller;
 
-import com.pos.system.entity.User;
-import com.pos.system.repository.UserRepository;
+import com.pos.system.entity.people.User;
+import com.pos.system.repository.people.UserRepository;
 import com.pos.system.security.JwtUtil;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

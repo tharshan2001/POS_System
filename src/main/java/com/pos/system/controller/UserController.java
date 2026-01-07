@@ -1,7 +1,7 @@
 package com.pos.system.controller;
 
 import com.pos.system.dto.UserDTO;
-import com.pos.system.entity.User;
+import com.pos.system.entity.people.User;
 import com.pos.system.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

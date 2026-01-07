@@ -1,6 +1,6 @@
 package com.pos.system.service;
 
-import com.pos.system.entity.Role;
+import com.pos.system.entity.people.Role;
 import java.util.List;
 
 public interface RoleService {

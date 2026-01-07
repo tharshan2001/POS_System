@@ -1,7 +1,7 @@
 package com.pos.system.service;
 
 import com.pos.system.dto.UserDTO;
-import com.pos.system.entity.User;
+import com.pos.system.entity.people.User;
 import java.util.List;
 
 public interface UserService {

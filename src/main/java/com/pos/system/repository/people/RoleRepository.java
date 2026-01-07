@@ -1,6 +1,6 @@
-package com.pos.system.repository;
+package com.pos.system.repository.people;
 
-import com.pos.system.entity.Role;
+import com.pos.system.entity.people.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

@@ -1,6 +1,6 @@
 package com.pos.system.controller;
 
-import com.pos.system.entity.Role;
+import com.pos.system.entity.people.Role;
 import com.pos.system.service.RoleService;
 import org.springframework.web.bind.annotation.*;
 

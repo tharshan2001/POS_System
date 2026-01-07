@@ -1,7 +1,7 @@
 package com.pos.system.service.impl;
 
-import com.pos.system.entity.Role;
-import com.pos.system.repository.RoleRepository;
+import com.pos.system.entity.people.Role;
+import com.pos.system.repository.people.RoleRepository;
 import com.pos.system.service.RoleService;
 import org.springframework.stereotype.Service;
 import java.util.List;

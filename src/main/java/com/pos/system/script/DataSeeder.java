@@ -1,9 +1,9 @@
 package com.pos.system.script;
 
-import com.pos.system.entity.Role;
-import com.pos.system.entity.User;
-import com.pos.system.repository.RoleRepository;
-import com.pos.system.repository.UserRepository;
+import com.pos.system.entity.people.Role;
+import com.pos.system.entity.people.User;
+import com.pos.system.repository.people.RoleRepository;
+import com.pos.system.repository.people.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;

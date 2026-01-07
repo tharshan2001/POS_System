@@ -1,11 +1,9 @@
 package com.pos.system.service.impl;
 
 import com.pos.system.dto.UserDTO;
-import com.pos.system.entity.Branch;
-import com.pos.system.entity.Role;
-import com.pos.system.entity.User;
+import com.pos.system.entity.people.User;
 import com.pos.system.exception.ResourceNotFoundException;
-import com.pos.system.repository.UserRepository;
+import com.pos.system.repository.people.UserRepository;
 import com.pos.system.security.PasswordUtil;
 import com.pos.system.service.UserService;
 import org.springframework.stereotype.Service;

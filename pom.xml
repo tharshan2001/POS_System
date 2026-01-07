@@ -16,7 +16,7 @@
 	<groupId>com.pos.system</groupId>
 	<artifactId>pos_system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging> <!-- Changed from war to jar -->
 
 	<name>pos_system</name>
 	<description>POS and Inventory Management System</description>
@@ -62,7 +62,6 @@
 		</dependency>
 
 		<!-- JWT -->
-
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
@@ -125,13 +124,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Tomcat (WAR support) -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -152,7 +144,7 @@
 
 	<build>
 		<plugins>
-			<!-- Compiler Plugin (fixed version for Java 21) -->
+			<!-- Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

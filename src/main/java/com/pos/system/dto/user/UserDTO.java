@@ -1,4 +1,4 @@
-package com.pos.system.dto;
+package com.pos.system.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;

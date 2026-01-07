@@ -1,6 +1,6 @@
 package com.pos.system.service.impl;
 
-import com.pos.system.dto.UserDTO;
+import com.pos.system.dto.user.UserDTO;
 import com.pos.system.entity.people.User;
 import com.pos.system.exception.ResourceNotFoundException;
 import com.pos.system.repository.people.UserRepository;

@@ -1,47 +1,28 @@
 package com.pos.system.controller;
 
-import com.pos.system.entity.people.User;
-import com.pos.system.repository.people.UserRepository;
-import com.pos.system.security.JwtUtil;
+import com.pos.system.dto.user.LoginResponseDTO;
+import com.pos.system.service.AuthService;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final AuthService authService;
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest request) {
-        User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
-            throw new RuntimeException("Invalid credentials");
-        }
-
-        String token = jwtUtil.generateToken(user.getUsername());
-        return new LoginResponse(token);
+    public LoginResponseDTO login(@RequestBody LoginRequest request, HttpServletResponse response) {
+        return authService.login(request, response);
     }
 
     @Data
-    static class LoginRequest {
+    public static class LoginRequest {
         private String username;
         private String password;
-    }
-
-    @Data
-    static class LoginResponse {
-        private final String token;
     }
 }

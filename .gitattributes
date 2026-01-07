@@ -1,0 +1,27 @@
+/mvnw text eol=lf
+*.cmd text eol=crlf
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Keep shell scripts LF
+*.sh text eol=lf
+
+# Keep Windows batch scripts CRLF
+*.cmd text eol=crlf
+
+# Java source files LF
+*.java text eol=lf
+
+# Properties files LF
+*.properties text eol=lf
+
+# XML files LF
+*.xml text eol=lf
+
+# Ignore binary files for line endings
+*.jar binary
+*.war binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary

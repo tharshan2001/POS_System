@@ -1,7 +1,8 @@
 package com.pos.system.service.impl;
 
-import com.pos.system.controller.AuthController.LoginRequest;
+import com.pos.system.dto.user.LoginRequest;
 import com.pos.system.dto.user.LoginResponseDTO;
+import com.pos.system.dto.user.Msg;
 import com.pos.system.entity.people.User;
 import com.pos.system.repository.people.UserRepository;
 import com.pos.system.security.JwtUtil;
@@ -21,8 +22,12 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
+
+    //login
     @Override
     public LoginResponseDTO login(LoginRequest request, HttpServletResponse response) {
+
+
         // 1. Find the user by username
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -38,11 +43,34 @@ public class AuthServiceImpl implements AuthService {
         // 4. Set token in HttpOnly cookie
         Cookie cookie = new Cookie("jwt", token);
         cookie.setHttpOnly(true);
-        cookie.setPath("/"); // cookie is valid for the whole domain
-        cookie.setMaxAge(24 * 60 * 60); // 1 day expiry
+        cookie.setPath("/");
+        cookie.setMaxAge(24 * 60 * 60);
         response.addCookie(cookie);
 
-        // 5. Return user info (without token)
+        // 5. Return user info
         return new LoginResponseDTO(user.getFullName(), user.getRole().getName());
     }
+
+
+    @Override
+    public Msg logout(String token, HttpServletResponse response) {
+
+        // Validate token first
+        if (token == null || !jwtUtil.validateToken(token)) {
+            throw new RuntimeException("Invalid or missing token");
+        }
+
+        // Clear the cookie
+        Cookie cookie = new Cookie("jwt", "");
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        new Msg("Logout SuccessFully !!");
+
+        return null;
+    }
+
+
 }

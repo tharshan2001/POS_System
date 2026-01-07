@@ -1,12 +1,11 @@
 package com.pos.system.dto.user;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class LoginResponseDTO {
-    private String fullName;
-    private String role;
+public class Msg {
+
+    private String msg;
 }

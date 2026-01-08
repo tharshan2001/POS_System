@@ -2,7 +2,7 @@ package com.pos.system.service.impl;
 
 import com.pos.system.dto.user.LoginRequest;
 import com.pos.system.dto.user.LoginResponseDTO;
-import com.pos.system.dto.user.Msg;
+import com.pos.system.dto.user.ResponseMsg;
 import com.pos.system.entity.people.User;
 import com.pos.system.repository.people.UserRepository;
 import com.pos.system.security.JwtUtil;
@@ -53,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public Msg logout(String token, HttpServletResponse response) {
+    public ResponseMsg logout(String token, HttpServletResponse response) {
 
         // Validate token first
         if (token == null || !jwtUtil.validateToken(token)) {
@@ -67,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
         cookie.setMaxAge(0);
         response.addCookie(cookie);
 
-        new Msg("Logout SuccessFully !!");
+        new ResponseMsg("Logout SuccessFully !!");
 
         return null;
     }

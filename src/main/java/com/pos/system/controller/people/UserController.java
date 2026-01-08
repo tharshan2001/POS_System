@@ -1,11 +1,13 @@
-package com.pos.system.controller;
+package com.pos.system.controller.people;
 
 import com.pos.system.dto.user.UserDTO;
 import com.pos.system.entity.people.User;
 import com.pos.system.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@PreAuthorize("hasRole('SUPER ADMIN')")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.*;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
@@ -30,18 +30,18 @@ public class DataSeeder implements CommandLineRunner {
     @Transactional
     public void run(String... args) throws Exception {
 
-        // 1️⃣ Seed Super Admin Role
-        Role superAdminRole = roleRepository.findByName("Super Admin")
+        // Seed Super Admin Role
+        Role superAdmin = roleRepository.findByName("Super Admin")
                 .orElseGet(() -> roleRepository.save(new Role("Super Admin", "Has full access")));
 
-        // 2️⃣ Seed Super Admin User
+        // Seed Super Admin User
         if (!userRepository.existsByUsername("superadmin")) {
             User admin = new User();
             admin.setUsername("superadmin");
             admin.setPasswordHash(passwordEncoder.encode("admin123")); // hashed password
             admin.setFullName("Super Admin");
             admin.setEmail("admin@example.com");
-            admin.setRole(superAdminRole);
+            admin.setRole(superAdmin);
             admin.setCreatedAt(LocalDateTime.now());
             admin.setBranch(null); // null for super admin
 

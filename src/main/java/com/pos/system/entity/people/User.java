@@ -1,10 +1,10 @@
 package com.pos.system.entity.people;
 
 import com.pos.system.entity.Core.Branch;
+import com.pos.system.entity.people.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Getter

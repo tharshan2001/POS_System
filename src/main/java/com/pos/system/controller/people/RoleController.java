@@ -1,4 +1,4 @@
-package com.pos.system.controller;
+package com.pos.system.controller.people;
 
 import com.pos.system.entity.people.Role;
 import com.pos.system.service.RoleService;

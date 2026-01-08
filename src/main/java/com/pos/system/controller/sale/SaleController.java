@@ -1,95 +1,106 @@
 package com.pos.system.controller.sale;
 
+import com.pos.system.dto.user.SaleRequestDTO;
+import com.pos.system.entity.Core.Stock;
 import com.pos.system.entity.Sale.Sale;
+import com.pos.system.entity.Sale.SaleItem;
 import com.pos.system.entity.people.User;
-import com.pos.system.repository.people.UserRepository;
+import com.pos.system.entity.people.Customer;
+import com.pos.system.repository.core.StockRepository;
+import com.pos.system.repository.sales.SaleItemRepository;
 import com.pos.system.repository.sales.SaleRepository;
+import com.pos.system.repository.people.CustomerRepository;
+import com.pos.system.security.FindCurrentUser;
+import com.pos.system.security.ValidateAdmin;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/api/sales")
 public class SaleController {
 
     private final SaleRepository saleRepository;
-    private final UserRepository userRepository;
+    private final SaleItemRepository saleItemRepository;
+    private final StockRepository stockRepository;
+    private final CustomerRepository customerRepository;
+    private final FindCurrentUser currentUser;
+    private final ValidateAdmin validateAdmin;
 
     public SaleController(SaleRepository saleRepository,
-                          UserRepository userRepository) {
+                          SaleItemRepository saleItemRepository,
+                          StockRepository stockRepository,
+                          CustomerRepository customerRepository,
+                          FindCurrentUser currentUser,
+                          ValidateAdmin validateAdmin) {
         this.saleRepository = saleRepository;
-        this.userRepository = userRepository;
+        this.saleItemRepository = saleItemRepository;
+        this.stockRepository = stockRepository;
+        this.customerRepository = customerRepository;
+        this.currentUser = currentUser;
+        this.validateAdmin = validateAdmin;
     }
 
-    // ✅ Cashier / Shop Manager create sale
-    @PreAuthorize("hasAnyRole('CASHIER','SHOP_MANAGER','ADMIN','SUPER_ADMIN')")
+    // Create sale
     @PostMapping
-    public Sale createSale(@RequestBody Sale sale) {
+    @Transactional
+    @PreAuthorize("hasAnyRole('CASHIER','SHOP_MANAGER','ADMIN','SUPER_ADMIN')")
+    public Sale createSale(@RequestBody SaleRequestDTO request) {
 
-        User currentUser = getCurrentUser();
+        User user = currentUser.getCurrentUser();
 
-        // 🔒 FORCE branch from logged-in user
-        sale.setUser(currentUser);
-        sale.setBranch(currentUser.getBranch());
+        log.info("Creating sale for user: id={}, username={}", user.getId(), user.getUsername());
+
+        Customer customer = customerRepository.findById(request.getCustomerId())
+                .orElseThrow(() -> new RuntimeException("Customer not found: " + request.getCustomerId()));
+
+        Sale sale = new Sale();
+        sale.setUser(user);
+        sale.setCustomer(customer);
+        sale.setBranch(user.getBranch());
         sale.setSaleDate(LocalDateTime.now());
 
-        return saleRepository.save(sale);
-    }
+        // Map SaleItems
+        List<SaleItem> saleItems = request.getItems().stream().map(itemDTO -> {
 
-    // ✅ Users see ONLY their branch sales
-    @PreAuthorize("hasAnyRole('CASHIER','SHOP_MANAGER','ADMIN','SUPER_ADMIN')")
-    @GetMapping
-    public List<Sale> getMyBranchSales() {
+            Stock stock = stockRepository.findByBranchIdAndProductId(
+                            user.getBranch().getId(),
+                            itemDTO.getProductId())
+                    .orElseThrow(() -> new RuntimeException(
+                            "Product not found in stock: " + itemDTO.getProductId()));
 
-        User currentUser = getCurrentUser();
+            if (stock.getQuantity() < itemDTO.getQuantity()) {
+                throw new RuntimeException(
+                        "Insufficient stock for product: " + itemDTO.getProductId());
+            }
 
-        return saleRepository.findByBranchId(
-                currentUser.getBranch().getId()
-        );
-    }
+            stock.setQuantity(stock.getQuantity() - itemDTO.getQuantity());
+            stockRepository.save(stock);
 
-    // ✅ View single sale (branch safe)
-    @PreAuthorize("hasAnyRole('CASHIER','SHOP_MANAGER','ADMIN','SUPER_ADMIN')")
-    @GetMapping("/{id}")
-    public Sale getSale(@PathVariable Long id) {
+            SaleItem saleItem = new SaleItem();
+            saleItem.setProduct(stock.getProduct());
+            saleItem.setQuantity(itemDTO.getQuantity());
+            saleItem.setPrice(stock.getProduct().getPrice());
+            saleItem.setSale(sale);
 
-        User currentUser = getCurrentUser();
+            return saleItem;
+        }).collect(Collectors.toList());
 
-        Sale sale = saleRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Sale not found"));
+        double totalAmount = saleItems.stream()
+                .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                .sum();
+        sale.setTotalAmount(totalAmount);
 
-        if (!sale.getBranch().getId().equals(currentUser.getBranch().getId())
-                && !hasAdminRole()) {
-            throw new RuntimeException("Access denied");
-        }
+        Sale savedSale = saleRepository.save(sale);
+        saleItemRepository.saveAll(saleItems);
 
-        return sale;
-    }
-
-    // -------- helpers --------
-
-    private User getCurrentUser() {
-        String username = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getName();
-
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }
-
-    private boolean hasAdminRole() {
-        return SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getAuthorities()
-                .stream()
-                .anyMatch(a ->
-                        a.getAuthority().equals("ROLE_ADMIN")
-                                || a.getAuthority().equals("ROLE_SUPER_ADMIN")
-                );
+        log.info("Sale created successfully: saleId={}, totalAmount={}", savedSale.getId(), totalAmount);
+        return savedSale;
     }
 }

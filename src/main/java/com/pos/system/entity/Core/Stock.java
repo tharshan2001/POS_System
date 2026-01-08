@@ -25,6 +25,7 @@ public class Stock {
     private Product product;
 
     private Integer quantity;
+
     private LocalDateTime updatedAt;
 
     @PreUpdate

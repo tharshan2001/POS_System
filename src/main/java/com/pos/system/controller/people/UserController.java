@@ -7,7 +7,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@PreAuthorize("hasRole('SUPER ADMIN')")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

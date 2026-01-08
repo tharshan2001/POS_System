@@ -18,10 +18,17 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne private Branch branch;
-    @ManyToOne private Customer customer;
-    @ManyToOne private User user;
-    @ManyToOne private PaymentMethod paymentMethod;
+    @ManyToOne
+    private Branch branch;
+
+    @ManyToOne
+    private Customer customer;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private PaymentMethod paymentMethod;
 
     private Double totalAmount;
     private LocalDateTime saleDate;

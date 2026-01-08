@@ -1,4 +1,4 @@
-package com.pos.system.service.impl;
+package com.pos.system.impl;
 
 
 
@@ -40,5 +40,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteById(Long id) {
         categoryRepository.deleteById(id);
+    }
+
+    public Category createIfNotExists(String name) {
+        return categoryRepository.findByName(name)
+                .orElseGet(() -> {
+                    Category category = new Category();
+                    category.setName(name);
+                    return categoryRepository.save(category);
+                });
     }
 }

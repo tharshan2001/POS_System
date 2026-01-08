@@ -1,7 +1,4 @@
 package com.pos.system.service;
-
-
-
 import com.pos.system.entity.Core.Product;
 
 import java.util.List;

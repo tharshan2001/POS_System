@@ -1,4 +1,4 @@
-package com.pos.system.service.impl;
+package com.pos.system.impl;
 
 import com.pos.system.dto.user.LoginRequest;
 import com.pos.system.dto.user.LoginResponseDTO;

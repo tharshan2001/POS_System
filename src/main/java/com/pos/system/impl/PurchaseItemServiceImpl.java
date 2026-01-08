@@ -1,4 +1,4 @@
-package com.pos.system.service.impl;
+package com.pos.system.impl;
 
 import com.pos.system.entity.Purchases.PurchaseItem;
 import com.pos.system.repository.purchase.PurchaseItemRepository;

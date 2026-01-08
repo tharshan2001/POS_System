@@ -11,4 +11,6 @@ public interface CategoryService {
     Optional<Category> findByName(String name);
     List<Category> findAll();
     void deleteById(Long id);
+
+    Category createIfNotExists(String name);
 }

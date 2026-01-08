@@ -23,11 +23,11 @@ public class RoleSeeder implements CommandLineRunner {
     }
 
     private void seedRoles() {
-        createRoleIfNotExists("Cashier", "Handles sales transactions");
-        createRoleIfNotExists("Shop Manager", "Manages the shop operations");
-        createRoleIfNotExists("Warehouse Manager", "Manages inventory and stock");
-        createRoleIfNotExists("Warehouse Staff", "Supports warehouse operations");
-        createRoleIfNotExists("Admin", "Administers the system");
+        createRoleIfNotExists("CASHIER", "Handles sales transactions");
+        createRoleIfNotExists("SHOP_MANAGER", "Manages the shop operations");
+        createRoleIfNotExists("WAREHOUSE_MANAGER", "Manages inventory and stock");
+        createRoleIfNotExists("WAREHOUSE_STAFF", "Supports warehouse operations");
+        createRoleIfNotExists("ADMIN", "Administers the system");
     }
 
     private void createRoleIfNotExists(String name, String description) {

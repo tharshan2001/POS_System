@@ -1,4 +1,4 @@
-package com.pos.system.service.impl;
+package com.pos.system.impl;
 
 import com.pos.system.entity.Audit.AuditLog;
 import com.pos.system.repository.audit.AuditLogRepository;

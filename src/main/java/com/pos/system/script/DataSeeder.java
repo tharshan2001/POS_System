@@ -31,15 +31,15 @@ public class DataSeeder implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // Seed Super Admin Role
-        Role superAdmin = roleRepository.findByName("Super Admin")
-                .orElseGet(() -> roleRepository.save(new Role("Super Admin", "Has full access")));
+        Role superAdmin = roleRepository.findByName("SUPER_ADMIN")
+                .orElseGet(() -> roleRepository.save(new Role("SUPER_ADMIN", "Has full access")));
 
         // Seed Super Admin User
         if (!userRepository.existsByUsername("superadmin")) {
             User admin = new User();
             admin.setUsername("superadmin");
             admin.setPasswordHash(passwordEncoder.encode("admin123")); // hashed password
-            admin.setFullName("Super Admin");
+            admin.setFullName("SUPER_ADMIN");
             admin.setEmail("admin@example.com");
             admin.setRole(superAdmin);
             admin.setCreatedAt(LocalDateTime.now());

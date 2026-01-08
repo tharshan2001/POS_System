@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@PreAuthorize("@branchSecurity.canAccessBranch(#id)")
 @RestController
 @RequestMapping("/api/branches")
 public class BranchController {

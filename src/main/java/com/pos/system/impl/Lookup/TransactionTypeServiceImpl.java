@@ -1,10 +1,10 @@
-package com.pos.system.impl;
+package com.pos.system.impl.Lookup;
 
 
 
 import com.pos.system.entity.Lookup.TransactionType;
 import com.pos.system.repository.lookup.TransactionTypeRepository;
-import com.pos.system.service.*;
+import com.pos.system.service.Lookup.TransactionTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

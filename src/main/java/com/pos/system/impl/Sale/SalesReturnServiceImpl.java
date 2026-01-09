@@ -1,9 +1,9 @@
-package com.pos.system.impl;
+package com.pos.system.impl.Sale;
 
 
 import com.pos.system.entity.Sale.SalesReturn;
 import com.pos.system.repository.sales.SalesReturnRepository;
-import com.pos.system.service.SalesReturnService;
+import com.pos.system.service.Sale.SalesReturnService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
-package com.pos.system.impl;
+package com.pos.system.impl.core;
 
 
 import com.pos.system.entity.Audit.Grn;
 import com.pos.system.repository.audit.GrnRepository;
-import com.pos.system.service.GrnService;
+import com.pos.system.service.Core.GrnService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.pos.system.service;
+package com.pos.system.service.people;
 
 import com.pos.system.dto.user.UserDTO;
 import com.pos.system.entity.people.User;

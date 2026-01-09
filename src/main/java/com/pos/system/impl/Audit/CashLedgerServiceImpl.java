@@ -1,4 +1,4 @@
-package com.pos.system.impl;
+package com.pos.system.impl.Audit;
 
 
 import com.pos.system.entity.Audit.CashLedger;

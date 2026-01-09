@@ -1,4 +1,4 @@
-package com.pos.system.service;
+package com.pos.system.service.Lookup;
 
 import com.pos.system.entity.Lookup.Status;
 

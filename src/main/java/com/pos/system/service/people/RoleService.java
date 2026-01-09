@@ -1,4 +1,4 @@
-package com.pos.system.service;
+package com.pos.system.service.people;
 
 import com.pos.system.entity.people.Role;
 import java.util.List;

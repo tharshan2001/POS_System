@@ -1,9 +1,9 @@
-package com.pos.system.impl;
+package com.pos.system.impl.Audit;
 
 
 import com.pos.system.entity.Audit.CreditLedger;
 import com.pos.system.repository.ledger.CreditLedgerRepository;
-import com.pos.system.service.CreditLedgerService;
+import com.pos.system.service.Audit.CreditLedgerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

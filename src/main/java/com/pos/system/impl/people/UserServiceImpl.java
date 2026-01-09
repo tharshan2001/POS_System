@@ -1,4 +1,4 @@
-package com.pos.system.impl;
+package com.pos.system.impl.people;
 
 import com.pos.system.dto.user.UserDTO;
 import com.pos.system.entity.Core.Branch;
@@ -9,7 +9,7 @@ import com.pos.system.repository.core.BranchRepository;
 import com.pos.system.repository.people.RoleRepository;
 import com.pos.system.repository.people.UserRepository;
 import com.pos.system.security.PasswordUtil;
-import com.pos.system.service.UserService;
+import com.pos.system.service.people.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

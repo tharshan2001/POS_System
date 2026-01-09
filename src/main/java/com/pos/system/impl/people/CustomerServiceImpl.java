@@ -1,9 +1,9 @@
-package com.pos.system.impl;
+package com.pos.system.impl.people;
 
 import com.pos.system.entity.people.Customer;
 import com.pos.system.exception.ResourceNotFoundException;
 import com.pos.system.repository.people.CustomerRepository;
-import com.pos.system.service.CustomerService;
+import com.pos.system.service.people.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

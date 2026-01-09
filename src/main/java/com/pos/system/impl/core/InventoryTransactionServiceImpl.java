@@ -1,9 +1,9 @@
-package com.pos.system.impl;
+package com.pos.system.impl.core;
 
 
 import com.pos.system.entity.Core.InventoryTransaction;
 import com.pos.system.repository.core.InventoryTransactionRepository;
-import com.pos.system.service.InventoryTransactionService;
+import com.pos.system.service.Core.InventoryTransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

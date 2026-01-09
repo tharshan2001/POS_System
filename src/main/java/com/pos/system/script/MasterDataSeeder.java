@@ -1,8 +1,10 @@
 package com.pos.system.script;
 
-import com.pos.system.service.*;
 import com.pos.system.service.Core.CategoryService;
 import com.pos.system.service.Lookup.BranchTypeService;
+import com.pos.system.service.Lookup.PaymentMethodService;
+import com.pos.system.service.Lookup.StatusService;
+import com.pos.system.service.Lookup.TransactionTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

@@ -4,11 +4,11 @@ import com.pos.system.entity.Core.Branch;
 import com.pos.system.entity.Lookup.PaymentMethod;
 import com.pos.system.entity.people.Supplier;
 import com.pos.system.entity.people.User;
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "purchases")
@@ -20,13 +20,20 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne private Supplier supplier;
-    @ManyToOne private Branch branch;
-    @ManyToOne private PaymentMethod paymentMethod;
-    @ManyToOne private User createdBy;
+    @ManyToOne
+    private Supplier supplier;
+
+    @ManyToOne
+    private Branch branch;
+
+    @ManyToOne
+    private PaymentMethod paymentMethod;
+
+    @ManyToOne
+    private User createdBy;
 
     private Double totalAmount;
-    private LocalDateTime purchaseDate;
+    private LocalDate purchaseDate;
     private LocalDate dueDate;
 
     @Column(unique = true)

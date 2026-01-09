@@ -1,4 +1,4 @@
-package com.pos.system.service;
+package com.pos.system.service.Sale;
 
 import com.pos.system.entity.Sale.Sale;
 

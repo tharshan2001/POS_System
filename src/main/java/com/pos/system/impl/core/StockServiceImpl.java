@@ -1,9 +1,9 @@
-package com.pos.system.impl;
+package com.pos.system.impl.core;
 
 
 import com.pos.system.entity.Core.Stock;
 import com.pos.system.repository.core.StockRepository;
-import com.pos.system.service.StockService;
+import com.pos.system.service.Core.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

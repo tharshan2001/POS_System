@@ -1,6 +1,4 @@
-package com.pos.system.service;
-
-import com.pos.system.entity.Lookup.TransactionType;
+package com.pos.system.service.Lookup;
 
 public interface TransactionTypeService {
     void createIfNotExists(String name);

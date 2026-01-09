@@ -50,7 +50,7 @@ public class SaleController {
      */
     @PostMapping
     @Transactional
-    @PreAuthorize("hasAnyRole('CASHIER','SHOP_MANAGER')")
+    @PreAuthorize("hasAnyRole('CASHIER','SHOP_MANAGER','SUPER_ADMIN')")
     public Sale createSale(@RequestBody SaleRequestDTO request) {
 
         // 1️⃣ Get logged-in user

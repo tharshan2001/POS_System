@@ -1,4 +1,4 @@
-package com.pos.system.impl;
+package com.pos.system.impl.core;
 
 
 import com.pos.system.entity.Core.Branch;

@@ -1,4 +1,4 @@
-package com.pos.system.impl;
+package com.pos.system.impl.Lookup;
 
 import com.pos.system.entity.Lookup.BranchType;
 import com.pos.system.repository.core.BranchTypeRepository;

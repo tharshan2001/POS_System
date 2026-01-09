@@ -1,8 +1,8 @@
-package com.pos.system.impl;
+package com.pos.system.impl.purchases;
 
 import com.pos.system.entity.Purchases.PurchaseItem;
 import com.pos.system.repository.purchase.PurchaseItemRepository;
-import com.pos.system.service.PurchaseItemService;
+import com.pos.system.service.purchases.PurchaseItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

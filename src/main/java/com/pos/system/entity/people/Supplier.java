@@ -1,14 +1,14 @@
 package com.pos.system.entity.people;
 
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "suppliers")
-@Getter @Setter
+@Getter
+@Setter
 public class Supplier {
 
     @Id

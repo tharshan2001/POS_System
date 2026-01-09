@@ -1,7 +1,7 @@
 package com.pos.system.controller.people;
 
 import com.pos.system.entity.people.Customer;
-import com.pos.system.service.CustomerService;
+import com.pos.system.service.people.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package com.pos.system.controller.people;
 
 import com.pos.system.entity.people.Role;
-import com.pos.system.service.RoleService;
+import com.pos.system.service.people.RoleService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

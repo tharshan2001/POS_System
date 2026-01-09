@@ -1,8 +1,8 @@
-package com.pos.system.impl;
+package com.pos.system.impl.Lookup;
 
 import com.pos.system.entity.Lookup.PaymentMethod;
 import com.pos.system.repository.lookup.PaymentMethodRepository;
-import com.pos.system.service.PaymentMethodService;
+import com.pos.system.service.Lookup.PaymentMethodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

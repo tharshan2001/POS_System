@@ -1,9 +1,9 @@
-package com.pos.system.impl;
+package com.pos.system.impl.core;
 
 
 import com.pos.system.entity.Core.Product;
 import com.pos.system.repository.core.ProductRepository;
-import com.pos.system.service.ProductService;
+import com.pos.system.service.Core.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

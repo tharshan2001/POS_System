@@ -1,4 +1,4 @@
-package com.pos.system.service;
+package com.pos.system.service.purchases;
 
 import com.pos.system.entity.Purchases.PurchaseItem;
 

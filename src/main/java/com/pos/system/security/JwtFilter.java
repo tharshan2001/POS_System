@@ -9,13 +9,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.List;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -29,44 +30,50 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
+
+        String path = request.getRequestURI();
+
+        // ✅ Skip public endpoints
+        if (path.startsWith("/api/auth") || path.startsWith("/api/roles") || path.equals("/api/users")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String token = null;
-        String username = null;
 
-        // 1️⃣ Read token from Authorization header
+        // 1️⃣ Authorization header
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
         }
 
-        // 2️⃣ If header missing, read from cookies
+        // 2️⃣ Cookie fallback
         if (token == null && request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
-                if ("token".equals(cookie.getName())) {
+                if ("jwt".equals(cookie.getName())) {
                     token = cookie.getValue();
                     break;
                 }
             }
         }
 
-        // 3️⃣ Validate token
-        if (token != null && jwtUtil.validateToken(token)) {
-            username = jwtUtil.getUsernameFromToken(token);
-        }
+        // 3️⃣ Validate & authenticate
+        if (token != null && jwtUtil.validateToken(token)
+                && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-        // 4️⃣ Set user in SecurityContext
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            User user = userRepository.findByUsername(username)
-                    .orElseThrow(() -> new RuntimeException("User not found"));
+            String username = jwtUtil.getUsernameFromToken(token);
 
-            UsernamePasswordAuthenticationToken authToken =
-                    new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
-            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            userRepository.findByUsername(username).ifPresent(user -> {
+                var authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().getName()));
+                UsernamePasswordAuthenticationToken auth =
+                        new UsernamePasswordAuthenticationToken(user, null, authorities);
+                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(auth);
 
-            SecurityContextHolder.getContext().setAuthentication(authToken);
-
-            System.out.println("Logged-in user from SecurityContext: " + user.getUsername());
+                System.out.println("Authenticated user: " + user.getUsername());
+            });
         }
 
         filterChain.doFilter(request, response);

@@ -3,7 +3,7 @@ package com.pos.system.controller.people;
 import com.pos.system.dto.user.LoginRequest;
 import com.pos.system.dto.user.LoginResponseDTO;
 import com.pos.system.dto.user.ResponseMsg;
-import com.pos.system.service.AuthService;
+import com.pos.system.service.people.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

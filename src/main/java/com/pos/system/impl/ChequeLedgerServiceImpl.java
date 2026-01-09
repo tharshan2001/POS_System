@@ -2,7 +2,7 @@ package com.pos.system.impl;
 
 import com.pos.system.entity.Audit.ChequeLedger;
 import com.pos.system.repository.ledger.ChequeLedgerRepository;
-import com.pos.system.service.ChequeLedgerService;
+import com.pos.system.service.Audit.ChequeLedgerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

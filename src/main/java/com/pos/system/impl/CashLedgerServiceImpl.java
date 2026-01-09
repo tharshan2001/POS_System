@@ -3,7 +3,7 @@ package com.pos.system.impl;
 
 import com.pos.system.entity.Audit.CashLedger;
 import com.pos.system.repository.ledger.CashLedgerRepository;
-import com.pos.system.service.CashLedgerService;
+import com.pos.system.service.Audit.CashLedgerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

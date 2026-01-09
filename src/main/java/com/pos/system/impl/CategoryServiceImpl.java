@@ -4,7 +4,7 @@ package com.pos.system.impl;
 
 import com.pos.system.entity.Lookup.Category;
 import com.pos.system.repository.core.CategoryRepository;
-import com.pos.system.service.CategoryService;
+import com.pos.system.service.Core.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

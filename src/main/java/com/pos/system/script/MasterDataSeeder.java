@@ -1,13 +1,11 @@
 package com.pos.system.script;
 
-import com.pos.system.service.CategoryService;
-import com.pos.system.service.PaymentMethodService;
-import com.pos.system.service.StatusService;
-import com.pos.system.service.TransactionTypeService;
+import com.pos.system.service.*;
+import com.pos.system.service.Core.CategoryService;
+import com.pos.system.service.Lookup.BranchTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 @Component
 @RequiredArgsConstructor
 public class MasterDataSeeder implements CommandLineRunner {
@@ -16,9 +14,15 @@ public class MasterDataSeeder implements CommandLineRunner {
     private final StatusService statusService;
     private final TransactionTypeService transactionTypeService;
     private final CategoryService categoryService;
+    private final BranchTypeService branchTypeService;
 
     @Override
     public void run(String... args) {
+
+        // Branch Types
+        branchTypeService.createIfNotExists("RETAIL");
+        branchTypeService.createIfNotExists("WAREHOUSE");
+
         // Payment Methods
         paymentMethodService.createIfNotExists("Cash");
         paymentMethodService.createIfNotExists("Card");

@@ -2,7 +2,7 @@ package com.pos.system.impl;
 
 import com.pos.system.entity.Audit.AuditLog;
 import com.pos.system.repository.audit.AuditLogRepository;
-import com.pos.system.service.AuditLogService;
+import com.pos.system.service.Audit.AuditLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

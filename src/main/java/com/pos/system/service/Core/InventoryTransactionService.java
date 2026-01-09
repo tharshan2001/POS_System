@@ -1,4 +1,4 @@
-package com.pos.system.service;
+package com.pos.system.service.Core;
 import com.pos.system.entity.Core.InventoryTransaction;
 
 import java.util.List;

@@ -6,7 +6,7 @@ import com.pos.system.dto.user.ResponseMsg;
 import com.pos.system.entity.people.User;
 import com.pos.system.repository.people.UserRepository;
 import com.pos.system.security.JwtUtil;
-import com.pos.system.service.AuthService;
+import com.pos.system.service.people.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

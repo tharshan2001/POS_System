@@ -1,8 +1,11 @@
 package com.pos.system.controller.people;
 
+import com.pos.system.dto.people.CustomerReq;
+import com.pos.system.dto.user.ResponseMsg;
 import com.pos.system.entity.people.Customer;
 import com.pos.system.service.people.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,14 +13,25 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/customers")
 @RequiredArgsConstructor
+
+
 public class CustomerController {
 
     private final CustomerService customerService;
 
     // Create customer
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return customerService.createCustomer(customer);
+    public ResponseMsg createCustomer(@RequestBody CustomerReq req) {
+        Customer customer = new Customer();
+        customer.setName(req.getName());
+        customer.setPhone(req.getPhone());
+
+        customerService.createCustomer(customer);
+
+        // Create a new ResponseMsg object
+        ResponseMsg msg = new ResponseMsg();
+        msg.setMsg("Customer Added!");
+        return msg;
     }
 
     // Get all customers

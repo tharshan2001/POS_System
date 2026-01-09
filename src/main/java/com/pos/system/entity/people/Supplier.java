@@ -15,8 +15,11 @@ public class Supplier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = false, nullable = false)
     private String name;
+    @Column(unique = true, nullable = false)
     private String phone;
+    @Column(unique = true, nullable = true)
     private String email;
     private String address;
     private Integer creditTerms;

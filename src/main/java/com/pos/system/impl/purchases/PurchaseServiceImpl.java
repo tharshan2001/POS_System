@@ -65,7 +65,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         Branch branch = branchRepository.findById(dto.getBranchId())
                 .orElseThrow(() -> new ResourceNotFoundException("Branch not found"));
 
-        Supplier supplier = supplierRepository.findById(dto.getSupplierId())
+        Supplier supplier = supplierRepository.findByPhone(dto.getPhone())
                 .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
 
         PaymentMethod paymentMethod = paymentMethodRepository.findById(dto.getPaymentMethodId())

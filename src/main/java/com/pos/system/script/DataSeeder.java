@@ -42,6 +42,7 @@ public class DataSeeder implements CommandLineRunner {
             admin.setFullName("SUPER_ADMIN");
             admin.setEmail("admin@example.com");
             admin.setRole(superAdmin);
+            admin.setPhoneNumber("+10000000000");
             admin.setCreatedAt(LocalDateTime.now());
             admin.setBranch(null); // null for super admin
 

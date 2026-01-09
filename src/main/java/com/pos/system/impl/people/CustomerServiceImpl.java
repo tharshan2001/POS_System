@@ -16,14 +16,20 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
 
     @Override
-    public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
+    public void createCustomer(Customer customer) {
+
+        if (customerRepository.existsByPhone(customer.getPhone())) {
+            throw new RuntimeException("Customer already exists");
+        }
+
+        customerRepository.save(customer);
     }
 
     @Override
     public Customer getCustomerById(Long id) {
         return customerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer not found with id: " + id));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Customer not found with id: " + id));
     }
 
     @Override
@@ -34,17 +40,20 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer updateCustomer(Long id, Customer customerData) {
         Customer customer = getCustomerById(id);
+
         customer.setName(customerData.getName());
         customer.setPhone(customerData.getPhone());
         customer.setEmail(customerData.getEmail());
         customer.setAddress(customerData.getAddress());
         customer.setCreditLimit(customerData.getCreditLimit());
         customer.setCreditDays(customerData.getCreditDays());
+
         return customerRepository.save(customer);
     }
 
     @Override
     public void deleteCustomer(Long id) {
-        customerRepository.deleteById(id);
+        Customer customer = getCustomerById(id);
+        customerRepository.delete(customer);
     }
 }

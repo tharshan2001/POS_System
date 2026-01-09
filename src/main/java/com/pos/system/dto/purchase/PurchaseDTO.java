@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 public class PurchaseDTO {
-    private Long supplierId;
+    private String phone;
     private Long branchId;
     private Double totalAmount;
     private LocalDate purchaseDate;

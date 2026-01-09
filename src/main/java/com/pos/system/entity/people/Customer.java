@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "customers", uniqueConstraints = {@UniqueConstraint(columnNames = "email"), @UniqueConstraint(columnNames = "phone")})
 @Getter
 @Setter
 public class Customer {
@@ -16,9 +16,16 @@ public class Customer {
     private Long id;
 
     private String name;
+
+    @Column(unique = true, nullable = false)
     private String phone;
+
+    @Column(unique = false, nullable = true)
     private String email;
+
+    @Column(nullable = true)
     private String address;
+
     private Double creditLimit;
     private Integer creditDays;
 

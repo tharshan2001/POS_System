@@ -67,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
         cookie.setMaxAge(0);
         response.addCookie(cookie);
 
-        new ResponseMsg("Logout SuccessFully !!");
+        new ResponseMsg();
 
         return null;
     }

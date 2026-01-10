@@ -1,6 +1,5 @@
 package com.pos.system.impl.core;
 
-
 import com.pos.system.entity.Core.InventoryTransaction;
 import com.pos.system.repository.core.InventoryTransactionRepository;
 import com.pos.system.service.Core.InventoryTransactionService;
@@ -27,7 +26,12 @@ public class InventoryTransactionServiceImpl implements InventoryTransactionServ
     }
 
     @Override
-    public List<InventoryTransaction> findByBranchId(Long branchId) {
-        return repository.findByBranchId(branchId);
+    public List<InventoryTransaction> findByFromBranch(Long branchId) {
+        return repository.findByFromBranch_Id(branchId);
+    }
+
+    @Override
+    public List<InventoryTransaction> findByToBranch(Long branchId) {
+        return repository.findByToBranch_Id(branchId);
     }
 }

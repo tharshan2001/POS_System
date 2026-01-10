@@ -9,7 +9,8 @@ import lombok.*;
         name = "inventory_transaction_items",
         uniqueConstraints = @UniqueConstraint(columnNames = {"inventory_transaction_id", "product_id"})
 )
-@Getter @Setter
+@Getter
+@Setter
 public class InventoryTransactionItem {
 
     @Id

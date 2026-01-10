@@ -5,6 +5,7 @@ import com.pos.system.exception.ResourceNotFoundException;
 import com.pos.system.repository.people.CustomerRepository;
 import com.pos.system.service.people.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,19 +18,26 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void createCustomer(Customer customer) {
-
-        if (customerRepository.existsByPhone(customer.getPhone())) {
-            throw new RuntimeException("Customer already exists");
+        try {
+            if (customerRepository.existsByPhone(customer.getPhone())) {
+                throw new RuntimeException("Customer with this phone already exists");
+            }
+            customerRepository.save(customer);
+        } catch (DataIntegrityViolationException e) {
+            throw new RuntimeException("Customer with this phone already exists");
         }
-
-        customerRepository.save(customer);
     }
 
     @Override
     public Customer getCustomerById(Long id) {
         return customerRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Customer not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found with id: " + id));
+    }
+
+    @Override
+    public Customer getCustomerByPhone(String phone) {
+        return customerRepository.findByPhone(phone)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found with phone: " + phone));
     }
 
     @Override
@@ -38,22 +46,21 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer updateCustomer(Long id, Customer customerData) {
+    public Customer updateCustomerById(Long id, Customer customerData) {
         Customer customer = getCustomerById(id);
 
         customer.setName(customerData.getName());
-        customer.setPhone(customerData.getPhone());
         customer.setEmail(customerData.getEmail());
         customer.setAddress(customerData.getAddress());
         customer.setCreditLimit(customerData.getCreditLimit());
         customer.setCreditDays(customerData.getCreditDays());
+        // ❗ Do NOT update phone
 
         return customerRepository.save(customer);
     }
 
     @Override
-    public void deleteCustomer(Long id) {
-        Customer customer = getCustomerById(id);
-        customerRepository.delete(customer);
+    public void deleteCustomerById(Long id) {
+        customerRepository.delete(getCustomerById(id));
     }
 }

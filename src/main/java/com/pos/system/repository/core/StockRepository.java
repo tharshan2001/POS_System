@@ -18,4 +18,5 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
 
     List<Stock> findByBranch(Branch branch);
 
+
 }

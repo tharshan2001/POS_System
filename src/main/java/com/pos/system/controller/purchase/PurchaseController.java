@@ -3,11 +3,13 @@ package com.pos.system.controller.purchase;
 import com.pos.system.dto.purchase.PurchaseDTO;
 import com.pos.system.entity.Purchases.Purchase;
 import com.pos.system.service.purchases.PurchaseService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Transactional
 @RestController
 @RequestMapping("/api/purchases")
 public class PurchaseController {

@@ -13,11 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/customers")
 @RequiredArgsConstructor
-
-
 public class CustomerController {
 
     private final CustomerService customerService;
+    @Autowired
+    private ResponseMsg msg;
+
 
     // Create customer
     @PostMapping
@@ -28,8 +29,6 @@ public class CustomerController {
 
         customerService.createCustomer(customer);
 
-        // Create a new ResponseMsg object
-        ResponseMsg msg = new ResponseMsg();
         msg.setMsg("Customer Added!");
         return msg;
     }
@@ -40,21 +39,23 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
-    // Get single customer
-    @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable Long id) {
-        return customerService.getCustomerById(id);
+    // Get single customer by phone
+    @GetMapping("/phone/{phone}")
+    public Customer getCustomerByPhone(@PathVariable String phone) {
+        return customerService.getCustomerByPhone(phone);
     }
 
-    // Update customer
+    // Update customer by ID
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
-        return customerService.updateCustomer(id, customer);
+    public Customer updateCustomerById(@PathVariable Long id, @RequestBody Customer customer) {
+        return customerService.updateCustomerById(id, customer);
     }
 
-    // Delete customer
+    // Delete customer by ID
     @DeleteMapping("/{id}")
-    public void deleteCustomer(@PathVariable Long id) {
-        customerService.deleteCustomer(id);
+    public ResponseMsg deleteCustomerById(@PathVariable Long id) {
+        customerService.deleteCustomerById(id);
+        msg.setMsg("Customer deleted successfully");
+        return msg;
     }
 }

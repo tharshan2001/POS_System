@@ -4,8 +4,12 @@ import com.pos.system.entity.Core.InventoryTransaction;
 import java.util.List;
 import java.util.Optional;
 
-public interface InventoryTransactionService {
+public interface InventoryTransactionService {    List<InventoryTransaction> findByFromBranch(Long branchId);
+
+
     InventoryTransaction save(InventoryTransaction transaction);
+
     Optional<InventoryTransaction> findById(Long id);
-    List<InventoryTransaction> findByBranchId(Long branchId);
+
+    List<InventoryTransaction> findByToBranch(Long branchId);
 }

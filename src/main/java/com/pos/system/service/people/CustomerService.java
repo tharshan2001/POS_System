@@ -1,6 +1,5 @@
 package com.pos.system.service.people;
 
-
 import com.pos.system.entity.people.Customer;
 
 import java.util.List;
@@ -11,9 +10,11 @@ public interface CustomerService {
 
     Customer getCustomerById(Long id);
 
+    Customer getCustomerByPhone(String phone);
+
     List<Customer> getAllCustomers();
 
-    Customer updateCustomer(Long id, Customer customer);
+    Customer updateCustomerById(Long id, Customer customer);
 
-    void deleteCustomer(Long id);
+    void deleteCustomerById(Long id);
 }
